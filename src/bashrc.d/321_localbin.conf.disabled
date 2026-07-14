@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# ############################################################################
+# # REPO: bash_bashrcd                                   AUTHORS: hoefkensj@ #
+# # FILE: 321_localbin.conf                              UPDATED: 2026-07-14 #
+# ############################################################################
+#
+function localbin(){
+	pyscr='import sys,os,pathlib;og=os.environ["PATH"];P=og.split(":");o=pathlib.Path(P[0]).absolute();p=P[1:];n=pathlib.Path(os.getcwd(),".bin").absolute();print(((o == n)*(og))+((n != o)*(":".join([str(n),*p]))) ,end="")'
+	python -c "$pyscr"
+
+}
+alias LOCALBIN='export PATH=$( localbin )'
+
+#[[ "${PROMPT_COMMAND}" != *"LOCALBIN"* ]] && export PROMPT_COMMAND="LOCALBIN ; ${PROMPT_COMMAND}"
